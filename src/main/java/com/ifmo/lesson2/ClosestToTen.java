@@ -17,10 +17,10 @@ public class ClosestToTen {
     public static float closestToTen(float m, float n) {
         // TODO implement
        float a=Math.abs(10-m);
-            float b=Math.abs(10-n);
+       float b=Math.abs(10-n);
             if (a>b)
                 return n;
-                else
-                    return m;
+            else
+                return m;
     }
 }

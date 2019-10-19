@@ -13,5 +13,11 @@ public class Dividers {
         int n = scanner.nextInt();
 
         // TODO implement
+        int del=1;
+        while (del <= n)
+            if (n % del == 0)
+                System.out.println(del);
+
+            del+=1;
     }
 }

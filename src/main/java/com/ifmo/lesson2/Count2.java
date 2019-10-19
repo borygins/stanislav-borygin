@@ -13,26 +13,24 @@ public class Count2 {
     public static void main(String[] args) {
         System.out.println(count2());
     }
-
     public static int count2() {
         // TODO implement
         int cnt2 = 0;
-        for (int i = 0; i < 50001; i+=1){
+        for (int i = 1; i < 50001; i+=1){
             if(contains2(i)){
                 cnt2++;
             }
         }
-
         return cnt2;
     }
-
-    private static boolean contains2(int i){
+    public static boolean contains2(int i){
         for (int n=1;n<=5;n++) {
             if(i % 10 == 2){
                 return true;
             }
-            i/=10;
+            break;
         }
+        i/=10;
         return false;
     }
 }
