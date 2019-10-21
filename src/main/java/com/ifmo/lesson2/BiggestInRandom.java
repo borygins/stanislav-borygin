@@ -39,3 +39,4 @@ public class BiggestInRandom {
         return "В числе " + rnd + " наибольшая цифра " + max + ".";
     }
 }
+//Done

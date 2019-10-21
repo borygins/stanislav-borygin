@@ -14,10 +14,11 @@ public class Dividers {
 
         // TODO implement
         int del=1;
-        while (del <= n)
+        while (del <= n) {
             if (n % del == 0)
                 System.out.println(del);
-
-            del+=1;
+            del += 1;
+        }
     }
 }
+//Done

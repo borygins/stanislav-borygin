@@ -22,8 +22,8 @@ public class Factorial {
         int a=1;
     for (int f=0; f<n; f++){
         a = a * (f + 1);
-     //  N*=N;
     }
         return a;
     }
 }
+//Done

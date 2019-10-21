@@ -2,7 +2,7 @@ package com.ifmo.lesson1;
 
 public class ThreeDigitsSum {
     public static void main(String[] args) {
-        int n = 123;
+        int n = 456;
 
         int sum = sum(n);
 
@@ -17,3 +17,4 @@ public class ThreeDigitsSum {
         return h + m + l;
     }
 }
+//Done

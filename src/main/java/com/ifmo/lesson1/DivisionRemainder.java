@@ -8,8 +8,8 @@ public class DivisionRemainder {
     21 / 8 = 2 и 5 в остатке
      */
     public static void main(String[] args) {
-        int a = 25;
-        int b = 2;
+        int a = 21;
+        int b = 8;
         calculate(a,b);
     }
     public static void calculate(int a, int b) {
@@ -18,3 +18,4 @@ public class DivisionRemainder {
         System.out.printf("%s / %s = %s и %s в остатке\n", a, b, c, d);
     }
 }
+//Done

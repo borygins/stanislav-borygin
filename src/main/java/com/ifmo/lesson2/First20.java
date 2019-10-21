@@ -7,10 +7,10 @@ public class First20 {
      */
     public static void main(String[] args) {
         // TODO implement
-        for (int i = 1; i <= 20*20; i *= 2) {
-           //int a = 0;
-            int a = i * 2;
-            System.out.print(a);
+        for (int i = 1; i<=20; i += 1) {
+            int a = (int) Math.pow(2,i);
+            System.out.println(a);
         }
     }
 }
+//Done
