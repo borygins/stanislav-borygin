@@ -30,11 +30,12 @@ public class IntsOrdering {
                 int d = a;
         else if (b > a && b > c)
                int d = b;
-        else
-           int d = c;
+        else if (int d = c)
+            else if ()
+           ;
        // int e = b;
        // int f = c;
         return "Числа в переменных a, b и c: " + a + ", " + b + ", " + c + "\n" +
-                "Возрастающая последовательность: " + d + ", " + e + ", " + f;
+                "Возрастающая последовательность: " + 0 + ", " + 0 + ", " + 0;
     }
 }
