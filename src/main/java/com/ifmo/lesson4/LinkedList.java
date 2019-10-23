@@ -16,22 +16,27 @@ public class LinkedList {
      */
     public void add(Object val) {
         // TODO implement
-        if (head = null){
+        if (head == null){
             head = new Item(val);
         }
-        else
+        else {
             Item item = head;
-                    while (true){
-                        if (item.next==null){
-                            item.next= new Item(val);
-                            return;
-                        }
-                        item = item.next
-
-                    }
-
+            while (true) {
+                if (item.next == null) {
+                    item.next = new Item(val);
+                    return;
+                }
+                item = item.next;
+            }
+        }
     }
 
+    public static void main(String[] args) {
+       LinkedList list = new LinkedList();
+        list.add("Элемент1");
+        list.add("Элемент2");
+        list.add("Элемент3");
+    }
     /**
      * Извлекает значение из списка по индексу.
      *
@@ -41,8 +46,13 @@ public class LinkedList {
      */
     public Object get(int i) {
         // TODO implement
+        for (int j=0; ;j++){
+            if (j == i) {
+                return i;
+            }
+        }
 
-        return null;
+
     }
 
     /**
