@@ -24,7 +24,15 @@ public class PrimeNumber {
 
     public static boolean isPrime(int n) {
         // TODO implement
-
+        if (n < 4 && n > 1)
+            return true;
+        else
+            for (int i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i == 0)
+                    return false;
+                else
+                    return true;
+            }
         return false;
     }
 }

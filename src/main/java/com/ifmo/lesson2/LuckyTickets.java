@@ -16,15 +16,18 @@ public class LuckyTickets {
 
     public static int luckyTickets() {
         // TODO implement
-        int a,b,c,d,e,f
-for (int i=0; i < 1000000 ; i++){
-    a=i/100000;
-    b=(i/10000)%10;
-    c=
-    if ((a+b+c)==(d+e+f)){
-
+        int a,b,c,d,e,f,n = 0;
+for (int i=1; i < 1000000 ; i++){
+    a = i/100000;
+    b = (i/10000)%10;
+    c = (i/1000)%10;
+    d = (i/100)%10;
+    e = (i/10)%10;
+    f = i % 10;
+    if ((a+b+c)==(d+e+f))
+         n++;
+}
+        return n;
     }
 }
-        return 0;
-    }
-}
+//Done
