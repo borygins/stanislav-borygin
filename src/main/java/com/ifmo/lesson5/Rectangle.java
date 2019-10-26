@@ -1,14 +1,16 @@
 package com.ifmo.lesson5;
 
 public class Rectangle extends Shape {
-    public static void main(String[] args) {
-        private int a= 2;
-            int b=3;
-        private double Rectangle(a,b){
-            Shape.area = (a*b);
-            return s;
+    private double a;
+    private double b;
 
-        }
+    public Rectangle(double a, double b) {
+        this.a = a;
+        this.b = b;
     }
 
+    @Override
+    public double area() {
+        return a * b;
+    }
 }

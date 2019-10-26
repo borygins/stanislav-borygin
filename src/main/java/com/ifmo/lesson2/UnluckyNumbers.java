@@ -15,18 +15,19 @@ public class UnluckyNumbers {
 
     public static int unluckyNumbersCount() {
         // TODO implement
-       /* int a, b, c, d, e, n = 0;
-        for (int i = 1; i < 100000; i++) {
-            a = i/100000;
-            b = (i/10000)%10;
-            c = (i/1000)%10;
-            d = (i/100)%10;
-            e = (i/10)%10;
-            f = i % 10;
-            if (a == 13 || b == 13 || c == 13 || d == 13)
-                n++;*/
-
-
-        return 0;
+        int a, b, c, d, e, n = 0;
+        for (int i = 13254; i < 100000; i++) {
+            a = i/10000;
+            b = (i/1000)%10;
+            c = (i/100)%10;
+            d = (i/10)%10;
+            e = i % 10;
+            if (a == 4 || b == 4 || c == 4 || d == 4 || e == 4)
+                n++;
+            else if ((a==1&&b==3)||(b==1&&c==3)||(c==1&&d==3)||(d==1&&e==3))
+                n++;
+        }
+        return n;
     }
 }
+//Done
