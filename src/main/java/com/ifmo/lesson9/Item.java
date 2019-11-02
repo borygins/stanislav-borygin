@@ -1,19 +1,19 @@
-package com.ifmo.lesson4;
+package com.ifmo.lesson9;
 
 /**
  * Элемент связного списка, хранящий ссылку
- * на следующий элемент и на своё значение.
+ * на следующий элемент и на значение.
  * <p>
  *     Класс package-private, т.к. используется
  *     только для LinkedList'a.
  * </p>
  */
-class Item {
+class Item<T> {
     /** Значение элемента. */
-    Object value;
+    T value;
 
     /** Ссылка на следующий элемент. */
-    Item next;
+    Item<T> next;
 
     /**
      * Инициализирует элемент со значением
@@ -22,7 +22,7 @@ class Item {
      * @param value Значение, которое будет сохранено
      *              в этом элементе.
      */
-    Item(Object value) {
+    Item(T value) {
         this.value = value;
     }
 }
