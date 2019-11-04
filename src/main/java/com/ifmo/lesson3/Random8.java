@@ -1,5 +1,8 @@
 package com.ifmo.lesson3;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class Random8 {
     /*
     Создайте массив из 8 случайных целых чисел из отрезка [1;10]. Выведите массив на экран
@@ -8,7 +11,9 @@ public class Random8 {
      */
     public static void main(String[] args) {
         int[] randomNumbers = randomNumbers();
-
+        int[] replaceWithZeros = replaceWithZeros(randomNumbers);
+        System.out.println(Arrays.toString(randomNumbers));
+        System.out.println(Arrays.toString(replaceWithZeros));
         // TODO implement
 
         int[] replacedWithZeros = replaceWithZeros(randomNumbers);
@@ -18,13 +23,26 @@ public class Random8 {
 
     public static int[] randomNumbers() {
         // TODO implement
-
-        return new int[0];
+        int[] randomNumbers = new int[8];
+        for (int i = 0; i < 8; i++){
+            Random rnd = new Random();
+            randomNumbers[i] = rnd.nextInt(9)+1;
+        }
+        return randomNumbers;
     }
 
     public static int[] replaceWithZeros(int[] randomNumbers) {
         // TODO implement
-
-        return new int[0];
+        int[] replaceWithZeros = new int[8];
+//        for (int i = 0; i < 8; i++){
+//            if (randomNumbers[i]%2==0)
+//                replaceWithZeros[i]=randomNumbers[i];
+//        }
+        for (int i = 0; i < 8; i++){
+            if (i % 2 == 0)
+                replaceWithZeros[i]=randomNumbers[i];
+        }
+        return replaceWithZeros;
     }
 }
+//Done

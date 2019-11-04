@@ -36,6 +36,7 @@ public class LinkedList {
         list.add("Элемент1");
         list.add("Элемент2");
         list.add("Элемент3");
+       // System.out.println(list.get(2));
     }
     /**
      * Извлекает значение из списка по индексу.
@@ -46,13 +47,16 @@ public class LinkedList {
      */
     public Object get(int i) {
         // TODO implement
-        for (int j=0; ;j++){
+        if (head == null)
+            return null;
+
+        for (int j = 0; ;j++){
             if (j == i) {
                 return i;
             }
+            else
+                return null;
         }
-
-
     }
 
     /**
