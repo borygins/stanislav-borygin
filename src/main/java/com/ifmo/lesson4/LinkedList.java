@@ -47,16 +47,20 @@ public class LinkedList {
      */
     public Object get(int i) {
         // TODO implement
-        if (head == null)
-            return null;
+//            Item item = head;
+//            while (item==null){
+//
+//                item = item.next;
+//            }
+//            for (int j = 0; ;j++) {
+//            if (j == i)
+//                return item;
+//
+//            item = item.next;
+//        }
+//            //else
+        return null;
 
-        for (int j = 0; ;j++){
-            if (j == i) {
-                return i;
-            }
-            else
-                return null;
-        }
     }
 
     /**
