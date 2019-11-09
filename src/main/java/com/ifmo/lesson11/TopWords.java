@@ -1,17 +1,16 @@
 package com.ifmo.lesson11;
 
+import com.sun.jdi.Value;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TopWords {
     public static void main(String[] args) throws IOException {
         // Создаем файл, указывая путь к текстовому файлу на диске
-        File text = new File("wap.txt");
+        File text = new File("E:\\Курсы\\ifmo\\src\\main\\resources\\wap.txt");
 
         // Вычитываем все строки из файла
         List<String> lines = Files.readAllLines(text.toPath());
@@ -34,30 +33,54 @@ public class TopWords {
             }
         }
 
-        System.out.println(top10Words(lines));
-        System.out.println(top10Phrases(lines));
-        System.out.println(charactersFrequency(lines));
+        System.out.println(top10Words(words));
+        System.out.println(top10Phrases(words));
+        System.out.println(charactersFrequency(words));
     }
 
-    public static Map<String, Integer> top10Words(List<String> lines) {
+    public static Map<String, Integer> top10Words(List<String> words) {
         // todo implement
-//        Map<String, Integer> map = new HashMap<>();
-//
-//
-//        for (string :words){
-//            map.put();
+        Map<String, Integer> map = new HashMap<>();
+        int i = 0;
+        for (String word : words) {
+            Integer cnt = map.get(word);
+            if (cnt == null) {
+                map.put(word, 1);
+            } else {
+                map.put(word, cnt + 1);
+            }
+            i++;
+        }
+        // System.out.println(i);
+
+        map.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
+
+                //.forEach(System.out::println);
+        int j =0;
+                for (Map.Entry<String, Integer> top : map.entrySet()) {
+                    map.entrySet().stream()
+                            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                            .forEach( System.out::println);
+
+                    //System.out.println(top);
+                    if (j>10) {
+                        break;
+                    }
+                    j++;
+                }
 
         return Map.of();
     }
 
 
 
-    public static Map<String, Integer> top10Phrases(List<String> lines) {
+    public static Map<String, Integer> top10Phrases(List<String> words) {
         // todo implement
         return Map.of();
     }
 
-    public static Map<String, Character> charactersFrequency(List<String> lines) {
+    public static Map<Character, Integer> charactersFrequency(List<String> words) {
         // todo implement
         return Map.of();
     }
