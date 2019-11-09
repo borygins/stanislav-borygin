@@ -1,4 +1,4 @@
-package com.ifmo.lesson10;
+package com.ifmo.lessons12.Lyambda;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -10,7 +10,7 @@ import java.util.*;
 public class TopWords {
     public static void main(String[] args) throws IOException {
         // Создаем файл, указывая путь к текстовому файлу на диске
-        File text = new File("E:\\Курсы\\ifmo\\src\\main\\resources\\wap.txt");
+        File text = new File("C:\\wap.txt");
 
         // Вычитываем все строки из файла
         List<String> lines = Files.readAllLines(text.toPath());
@@ -54,21 +54,27 @@ public class TopWords {
         // System.out.println(i);
 
         map.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
-
-                //.forEach(System.out::println);
-        int j =0;
-                for (Map.Entry<String, Integer> top : map.entrySet()) {
-                    map.entrySet().stream()
-                            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                            .forEach( System.out::println);
-
-                    //System.out.println(top);
-                    if (j>10) {
-                        break;
-                    }
-                    j++;
-                }
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(10)
+                .forEach(System.out::println);
+//        int j =0;
+//                for (Map.Entry<String, Integer> top : map.entrySet()) {
+//                    map.entrySet().stream()
+//                            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+//                            .forEach( System.out::println);
+//
+//                    //System.out.println(top);
+//                    if (j>10) {
+//                        break;
+//                    }
+//                    j++;
+//                }
+//        for (int j = 0; j < ; j++) {
+//
+//            for (Map.Entry<String, Integer> top : map.entrySet()){
+//
+//            }
+//        }
 
         return Map.of();
     }
