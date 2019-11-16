@@ -48,28 +48,35 @@ public class StreamTasks {
         System.out.println(longestWords);
     }
 
+    public static List<String> CONTRIES = List.of("USA", "Russia", "India", "Japan", "Egypt");
+    public static List<String> NAME = List.of("Petya", "Vasya", "Masha", "Gosha", "Jhon");
+
     // Метод возвращает страны в порядке убывания их населения.
     public static List<String> countriesSortedByTheirPopulationDescending(Stream<Person> people) {
         // TODO implement.
-//people.sorted()
 //        получить страны и их население
         Map<String, Long> popInCountry = people.collect(Collectors.groupingBy(person -> person.country, Collectors.counting()));
 //
-        popInCountry.entrySet()
-                .stream()
-                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
-//
-        .map(e -> e.getKey())
-                .collect(Collectors.toList());
+        System.out.println("Countries and Peoples - " + popInCountry);
 
-        return List.of();
+        return popInCountry.entrySet()
+                    .stream()
+                    .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+    //
+                    .map(e -> e.getKey())
+                    .collect(Collectors.toList());
+
+//        return List.of();
     }
 
     // Метод находит страну (или одну из стран), в которых больше всего человек в возрасте
     // до 18 лет.
     public static String countryThatHasMostKids(Stream<Person> people) {
-        // TODO implement.
-
+//        // TODO implement.
+////        Map<String, Long> popInCountry =
+//                people.filter(age -> age.age < 18);
+////                      .collect(Collectors.groupingBy(person -> person.country, Collectors.counting()));
+//        System.out.println("Countries and Peoples"/* + popInCountry*/);
         return null;
     }
 
@@ -79,17 +86,15 @@ public class StreamTasks {
 
         return Map.of();
     }
-   public static List<String> CONTRIES = List.of("USA", "Russia", "India", "Japan", "Egypt");
-    public static List<String> NAME = List.of("Petya", "Vasya", "Masha", "Gosha", "Jhon");
     // Метод генерирует случайных людей в ограниченном наборе стран.
     // number - число желаемых людей.
     public static Stream<Person> generatePeople(int number) {
         // TODO implement.
         Random rnd = new Random();
-        Stream.generate(
-                () -> new Person( NAME.get(rnd.nextInt(NAME.size())),rnd.nextInt(), CONTRIES.get(rnd.nextInt(CONTRIES.size()))))
+      return   Stream.generate(
+                () -> new Person( NAME.get(rnd.nextInt(NAME.size())),rnd.nextInt(100), CONTRIES.get(rnd.nextInt(CONTRIES.size()))))
                 .limit(number);
-        return Stream.of();
+//        return Stream.of();
     }
 
     // Метод возвращает карту сгруппированных слов по их длине. Например, для

@@ -15,29 +15,38 @@ public class LinkedList {
      * @param val Значение, которое будет добавлено.
      */
     public void add(Object val) {
-        // TODO implement
-        if (head == null){
+        if (head == null) {
             head = new Item(val);
+
+            return;
         }
-        else {
-            Item item = head;
-            while (true) {
-                if (item.next == null) {
-                    item.next = new Item(val);
-                    return;
-                }
-                item = item.next;
-            }
+
+        //noinspection ConstantConditions
+        find(-1).next = new Item(val);
+    }
+
+    private Item find(int i) {
+        if (head == null)
+            return null;
+
+        if (i == 0)
+            return head;
+
+        int cnt = 1;
+
+        for (Item prev = head;;) {
+            Item next = prev.next;
+
+            if (next == null)
+                return i < 0 ? prev : null;
+
+            if (cnt++ == i)
+                return next;
+
+            prev = next;
         }
     }
 
-    public static void main(String[] args) {
-       LinkedList list = new LinkedList();
-        list.add("Элемент1");
-        list.add("Элемент2");
-        list.add("Элемент3");
-       // System.out.println(list.get(2));
-    }
     /**
      * Извлекает значение из списка по индексу.
      *
@@ -46,21 +55,9 @@ public class LinkedList {
      * или {@code null}, если не найдено.
      */
     public Object get(int i) {
-        // TODO implement
-//            Item item = head;
-//            while (item==null){
-//
-//                item = item.next;
-//            }
-//            for (int j = 0; ;j++) {
-//            if (j == i)
-//                return item;
-//
-//            item = item.next;
-//        }
-//            //else
-        return null;
+        Item item = find(i);
 
+        return item == null ? null : item.value;
     }
 
     /**
@@ -71,7 +68,25 @@ public class LinkedList {
      * @return Удаленное значение или {@code null}, если не найдено.
      */
     public Object remove(int i) {
-        // TODO implement
+        if (head == null)
+            return null;
+
+        if (i == 0) {
+            Item h = head;
+
+            head = head.next;
+
+            return h.value;
+        }
+
+        Item prev = find(i - 1);
+        Item cur;
+
+        if (prev != null && (cur = prev.next) != null) {
+            prev.next = cur.next;
+
+            return cur.value;
+        }
 
         return null;
     }

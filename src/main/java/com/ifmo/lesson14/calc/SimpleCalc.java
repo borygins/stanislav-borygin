@@ -46,6 +46,7 @@ public class SimpleCalc {
         }
     }
 
+
     static int calculate(String line) throws CalcException {
         if (!line.contains("+") && !line.contains("-")&&!line.contains("="))
             throw new CalcException("Expression must contain '+' or '-' or '=': " + line);
@@ -56,13 +57,26 @@ public class SimpleCalc {
             throw new CalcException("Expression must have only 3 operands separated with space (e.g. 2 + 4): " + line);
 
         OPERATOR operator = OPERATOR.parse(operands[1]);
-//if (operator == OPERATOR.ROVNO)
-//    peremen.put(operands[0], operands[2]);
-//else
+        if (operator == OPERATOR.ROVNO){
+            add(operands[0],operands[2]);
+            int v = Integer.parseInt(operands[2]);
+            return v;
+        }
+//        else{
+//
+//        }
+
         int op1 = parseOperand(operands[0]);
         int op2 = parseOperand(operands[2]);
 
-        return operator.apply(op1, op2);
+
+            return operator.apply(op1, op2);
+    }
+
+    private static Map<String, Integer> add (String p, String val){
+      int v = Integer.parseInt(val);
+        peremen.put(p, v);
+        return peremen;
     }
 
     private static int parseOperand(String string) throws CalcException {
@@ -80,6 +94,7 @@ public class SimpleCalc {
 
     private enum OPERATOR {
         PLUS, MINUS, ROVNO;
+
 
         int apply(int arg1, int arg2) throws CalcException {
             switch (this) {
