@@ -58,9 +58,7 @@ public class SimpleCalc {
 
         OPERATOR operator = OPERATOR.parse(operands[1]);
         if (operator == OPERATOR.ROVNO){
-            add(operands[0],operands[2]);
-            int v = Integer.parseInt(operands[2]);
-            return v;
+            return  add(operands[0],operands[2]);
         }
 //        else{
 //
@@ -73,10 +71,10 @@ public class SimpleCalc {
             return operator.apply(op1, op2);
     }
 
-    private static Map<String, Integer> add (String p, String val){
+    private static int add (String p, String val){
       int v = Integer.parseInt(val);
         peremen.put(p, v);
-        return peremen;
+        return v;
     }
 
     private static int parseOperand(String string) throws CalcException {
