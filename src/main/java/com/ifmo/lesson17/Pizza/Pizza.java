@@ -33,13 +33,16 @@ public class Pizza {
             this.peperoni = peperoni;
             return this;
         }
+        public Pizza build(){
+            return new Pizza(this);
+        }
     }
 
     private Pizza(Builder builder) {
         dough= builder.dough;
-      cheese =builder.cheese;
+        cheese =builder.cheese;
         catchup = builder.catchup;
-       tomato = builder.tomato;
-         peperoni = builder.peperoni;
+        tomato = builder.tomato;
+        peperoni = builder.peperoni;
     }
 }

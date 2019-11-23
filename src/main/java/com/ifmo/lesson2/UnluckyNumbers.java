@@ -16,7 +16,7 @@ public class UnluckyNumbers {
     public static int unluckyNumbersCount() {
         // TODO implement
         int a, b, c, d, e, n = 0;
-        for (int i = 13254; i < 100000; i++) {
+        for (int i = 1; i < 100000; i++) {
             a = i/10000;
             b = (i/1000)%10;
             c = (i/100)%10;

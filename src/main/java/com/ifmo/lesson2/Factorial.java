@@ -19,11 +19,11 @@ public class Factorial {
 
     public static long factorial(int n) {
         // TODO implement
-        int a=1;
-    for (int f=0; f<n; f++){
-        a = a * (f + 1);
+        long fact = 1;
+    for (int i = 0; i < n; i++){
+        fact = fact * (i + 1);
     }
-        return a;
+        return fact;
     }
 }
 //Done

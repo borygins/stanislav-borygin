@@ -9,9 +9,10 @@ public class Fibonacci20 {
     сумме двух предыдущих.
      */
     public static void main(String[] args) {
-        int[] fibonacciNumbers = fibonacciNumbers();
-        System.out.println(Arrays.toString(fibonacciNumbers));
-        // TODO implement
+//        int[] fibonacciNumbers =
+                fibonacciNumbers();
+//        System.out.println(Arrays.toString(fibonacciNumbers));
+//         TODO implement
     }
 
     public static int[] fibonacciNumbers() {
@@ -22,7 +23,7 @@ public class Fibonacci20 {
         for (int i=0; i<20; i++){
             int f = a + b;
             fibonacciNumbers[i] = f;
-            //System.out.println(f);
+            System.out.print(f);
             a = b;
             b = f;}
         return fibonacciNumbers;
