@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-class Injector {
+public class Injector {
     private Map<Class<?>, Object> singletons = new HashMap<>();
 
     @SuppressWarnings("unchecked")
