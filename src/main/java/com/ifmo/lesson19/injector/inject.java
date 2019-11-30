@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Inject {
+@interface Inject {
     Class<?> type() default DefaultType.class;
     boolean singleton() default true;
 }
