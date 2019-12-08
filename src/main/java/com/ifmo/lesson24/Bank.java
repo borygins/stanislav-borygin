@@ -1,15 +1,21 @@
 package com.ifmo.lesson24;
 
+import com.ifmo.lesson4.Library;
+
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Bank {
     private static Map<Long, String> users = new ConcurrentHashMap<Long, String>();
     private static List<Account> accounts = new CopyOnWriteArrayList<>();
+    private static BlockingQueue<Transaction> log = new LinkedBlockingDeque<>();
+    private static boolean logOn;
 
     private class User {
         private final long id;
@@ -24,7 +30,7 @@ public class Bank {
     private class Account {
         private final long id;
         private final long userId;
-        private long amount;
+        private volatile long amount;
 
         private Account(long id, long userId, long amount) {
             this.id = id;
@@ -33,7 +39,7 @@ public class Bank {
         }
     }
 
-    private class Transaction {
+    private static class Transaction {
         private final BigInteger transactionId;
         private final long fromAccountId;
         private final long toAccountId;
@@ -66,54 +72,94 @@ public class Bank {
         // Другими словами, создайте 100 потоков или пул из 100 потоков, в которых
         // выполните перевод вызовом метода transferMoney().
 
-        List<String> NAMES = List.of("Petya", "Vasya", "Masha", "Gosha", "Jhon");
+        Bank bank = new Bank();
+        bank.clientGenerate(10);
 
-        Random rnd = new Random();
-        for (int i = 0; i < 100; i++) {
+        Thread logger = new Thread(new Logger());
+        logger.start();
 
-            users.put(rnd.nextLong(), NAMES.get(rnd.nextInt(NAMES.size())));
-        }
-
-        for (long i = 0; i < 100; i++) {
-            accounts.add(rnd.nextLong(), i, rnd.nextLong());
-        }
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Thread thread = new Thread(new Transfer());
             thread.start();
         }
-        Thread logger = new Thread(new Logger());
-        logger.start();
+
+
     }
 
     // TODO Самая главная часть работы!
-    public void transferMoney(Account from, Account to, long amount) {
+    public static void transferMoney(Account from, Account to, long amount) {
         // 1. Атомарно и потокобезопасно перевести деньги в количестве 'amount' со счёта 'from' на счёт 'to'.
         // 2. Создать объект Transaction, содержащий информацию об операции и отправить в очередь
         // потоку Logger, который проснётся и напечатает её.
+        boolean res = false;
+        Object monitor = new Object();
 
+        if (from.equals(to)){
+            System.out.println("Transaction is not correct!!!");
+        }
+
+        else if (from.amount - amount >= 0) {
+            to.amount += amount;
+            res = true;
+
+        boolean logOn = true;
+        log.add(new Transaction(from.id, to.id, amount, res));}
 
     }
 
-    public static class Transfer extends Thread {
+    public void clientGenerate(int number) {
+
+        List<String> NAMES = List.of("Petya", "Vasya", "Masha", "Gosha", "Jhon");
+
+        Random rnd = new Random();
+        long id = 1;
+
+        for (int i = 0; i < number; i++) {
+            users.put(id, NAMES.get(rnd.nextInt(NAMES.size())));
+            accounts.add(new Account(id, id, rnd.nextInt(999999)));
+//            System.out.println(users);
+//            System.out.println(accounts);
+            id++;
+        }
+
+    }
+
+
+    public static class Transfer implements Runnable {
 
         @Override
         public void run() {
-            while (!isInterrupted()) {
-                synchronized (Bank.accounts) {
-                    try {
-                        transferMoney(accounts);
-                    }
-                }
-            }
+            Random rnd = new Random();
+            Account from = accounts.get(rnd.nextInt(10));
+            Account to = accounts.get(rnd.nextInt(10));
+            long amount = rnd.nextInt(999999);
+            transferMoney(from, to, amount);
+//            notify();
 
         }
     }
+
 
     public static class Logger implements Runnable {
 
         @Override
         public void run() {
-
+            boolean logOn = false;
+            int cnt = 1;
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+//                    wait();
+//                    if (logOn) {
+                        System.out.println("Number - " + cnt);
+                        System.out.println(Bank.log.take().toString());
+                        cnt++;
+//                    }
+                } catch (InterruptedException e) {
+                    logOn = false;
+                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
+                }
+            }
         }
     }
 }
