@@ -110,9 +110,9 @@ public class Bank {
             to.amount += amount;
             from.amount -= amount;
             res = true;
-
+        }
         boolean logOn = true;
-        log.add(new Transaction(from.id, to.id, amount, res));}
+        log.add(new Transaction(from.id, to.id, amount, res));
 
     }
 
