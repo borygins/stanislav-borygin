@@ -79,7 +79,15 @@ public class Bank {
         logger.start();
 
         for (int i = 0; i < 10; i++) {
-            Thread thread = new Thread(new Transfer());
+            Thread thread = new Thread(() -> {
+                Random rnd = new Random();
+                Account from = accounts.get(rnd.nextInt(10));
+                Account to = accounts.get(rnd.nextInt(10));
+                long amount = rnd.nextInt(999999);
+                bank.transferMoney(from, to, amount);
+//            notify();
+
+            });
             thread.start();
         }
 
@@ -87,7 +95,7 @@ public class Bank {
     }
 
     // TODO Самая главная часть работы!
-    public static synchronized void transferMoney(Account from, Account to, long amount) {
+    public synchronized void transferMoney(Account from, Account to, long amount) {
         // 1. Атомарно и потокобезопасно перевести деньги в количестве 'amount' со счёта 'from' на счёт 'to'.
         // 2. Создать объект Transaction, содержащий информацию об операции и отправить в очередь
         // потоку Logger, который проснётся и напечатает её.
@@ -125,20 +133,6 @@ public class Bank {
 
     }
 
-
-    public static class Transfer implements Runnable {
-
-        @Override
-        public void run() {
-            Random rnd = new Random();
-            Account from = accounts.get(rnd.nextInt(10));
-            Account to = accounts.get(rnd.nextInt(10));
-            long amount = rnd.nextInt(999999);
-            transferMoney(from, to, amount);
-//            notify();
-
-        }
-    }
 
 
     public static class Logger implements Runnable {
