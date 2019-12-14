@@ -15,7 +15,7 @@ public class Bank {
     private static Map<Long, String> users = new ConcurrentHashMap<Long, String>();
     private static List<Account> accounts = new CopyOnWriteArrayList<>();
     private static BlockingQueue<Transaction> log = new LinkedBlockingDeque<>();
-    private static boolean logOn;
+    private static boolean logOn = false;
 
     private class User {
         private final long id;
@@ -87,19 +87,20 @@ public class Bank {
     }
 
     // TODO Самая главная часть работы!
-    public static void transferMoney(Account from, Account to, long amount) {
+    public static synchronized void transferMoney(Account from, Account to, long amount) {
         // 1. Атомарно и потокобезопасно перевести деньги в количестве 'amount' со счёта 'from' на счёт 'to'.
         // 2. Создать объект Transaction, содержащий информацию об операции и отправить в очередь
         // потоку Logger, который проснётся и напечатает её.
         boolean res = false;
         Object monitor = new Object();
 
-        if (from.equals(to)){
+        if (from.id == to.id){
             System.out.println("Transaction is not correct!!!");
         }
 
         else if (from.amount - amount >= 0) {
             to.amount += amount;
+            from.amount -= amount;
             res = true;
 
         boolean logOn = true;
@@ -144,7 +145,7 @@ public class Bank {
 
         @Override
         public void run() {
-            boolean logOn = false;
+//            boolean logOn = false;
             int cnt = 1;
             while (!Thread.currentThread().isInterrupted()) {
                 try {

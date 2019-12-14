@@ -1,4 +1,4 @@
-package com.ifmo.lessons12;
+package com.ifmo.lesson12;
 
 
 import java.util.ArrayList;
