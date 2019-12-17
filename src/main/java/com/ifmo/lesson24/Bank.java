@@ -99,14 +99,29 @@ public class Bank {
         // 1. Атомарно и потокобезопасно перевести деньги в количестве 'amount' со счёта 'from' на счёт 'to'.
         // 2. Создать объект Transaction, содержащий информацию об операции и отправить в очередь
         // потоку Logger, который проснётся и напечатает её.
-        boolean res = false;
-        Object monitor = new Object();
-
-        if (from.id == to.id){
-            System.out.println("Transaction is not correct!!!");
+        if (from.id > to.id) {
+            synchronized (to) {
+                synchronized (from) {
+                    transferMoney1(from, to, amount);
+                }
+            }
+        } else synchronized (from) {
+            synchronized (to) {
+                transferMoney1(from, to, amount);
+            }
         }
+    }
 
-        else if (from.amount - amount >= 0) {
+    public synchronized void transferMoney1(Account from, Account to, long amount) {
+        // 1. Атомарно и потокобезопасно перевести деньги в количестве 'amount' со счёта 'from' на счёт 'to'.
+        // 2. Создать объект Transaction, содержащий информацию об операции и отправить в очередь
+        // потоку Logger, который проснётся и напечатает её.
+
+        boolean res = false;
+
+        if (from.id == to.id) {
+            System.out.println("Transaction is not correct!!!");
+        } else if (from.amount - amount >= 0) {
             to.amount += amount;
             from.amount -= amount;
             res = true;
@@ -134,7 +149,6 @@ public class Bank {
     }
 
 
-
     public static class Logger implements Runnable {
 
         @Override
@@ -145,9 +159,9 @@ public class Bank {
                 try {
 //                    wait();
 //                    if (logOn) {
-                        System.out.println("Number - " + cnt);
-                        System.out.println(Bank.log.take().toString());
-                        cnt++;
+                    System.out.println("Number - " + cnt);
+                    System.out.println(Bank.log.take().toString());
+                    cnt++;
 //                    }
                 } catch (InterruptedException e) {
                     logOn = false;
